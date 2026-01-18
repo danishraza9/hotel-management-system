@@ -24,7 +24,7 @@ public class Room {
      */
     public Room(String roomNumber, RoomType type, double pricePerNight) {
         this.roomNumber = validateRoomNumber(roomNumber);
-        this.type = Objects.requireNonNull(type, "Room type cannot be null");
+        this.type = validateRoomType(type);
         this.pricePerNight = validatePrice(pricePerNight);
         this.status = RoomStatus.AVAILABLE;
         this.description = "";
@@ -35,6 +35,13 @@ public class Room {
             throw new IllegalArgumentException("Room number cannot be null or empty");
         }
         return roomNumber.trim();
+    }
+    
+    private RoomType validateRoomType(RoomType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Room type cannot be null");
+        }
+        return type;
     }
     
     private double validatePrice(double pricePerNight) {
@@ -67,7 +74,10 @@ public class Room {
      * @throws IllegalArgumentException if status is null
      */
     public void setStatus(RoomStatus status) {
-        this.status = Objects.requireNonNull(status, "Room status cannot be null");
+        if (status == null) {
+            throw new IllegalArgumentException("Room status cannot be null");
+        }
+        this.status = status;
     }
     
     public String getDescription() {
@@ -81,7 +91,10 @@ public class Room {
      * @throws IllegalArgumentException if description is null
      */
     public void setDescription(String description) {
-        this.description = Objects.requireNonNull(description, "Description cannot be null");
+        if (description == null) {
+            throw new IllegalArgumentException("Description cannot be null");
+        }
+        this.description = description;
     }
     
     /**

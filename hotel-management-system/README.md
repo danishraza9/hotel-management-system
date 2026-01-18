@@ -8,7 +8,7 @@ The Hotel Management System provides functionality for managing hotels, rooms, b
 
 ## Language & Technology Stack
 
-- **Language**: Java 11
+- **Language**: Java 21 LTS
 - **Build Tool**: Apache Maven
 - **Testing Framework**: JUnit 5 (Jupiter)
 - **Design Patterns**: Factory, Service, Entity-Value Object patterns

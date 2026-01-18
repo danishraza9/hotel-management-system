@@ -23,7 +23,10 @@ public class HotelService {
      * @throws IllegalArgumentException if hotel is null
      */
     public HotelService(Hotel hotel) {
-        this.hotel = Objects.requireNonNull(hotel, "Hotel cannot be null");
+        if (hotel == null) {
+            throw new IllegalArgumentException("Hotel cannot be null");
+        }
+        this.hotel = hotel;
     }
     
     /**

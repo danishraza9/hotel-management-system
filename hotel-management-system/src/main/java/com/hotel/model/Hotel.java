@@ -96,7 +96,9 @@ public class Hotel {
      * @throws IllegalArgumentException if room is null
      */
     public boolean addRoom(Room room) {
-        Objects.requireNonNull(room, "Room cannot be null");
+        if (room == null) {
+            throw new IllegalArgumentException("Room cannot be null");
+        }
         
         if (rooms.stream().anyMatch(r -> r.getRoomNumber().equals(room.getRoomNumber()))) {
             return false;

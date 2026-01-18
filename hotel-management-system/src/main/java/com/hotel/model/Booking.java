@@ -34,11 +34,11 @@ public final class Booking {
                    double totalPrice, BookingStatus status) {
         this.bookingId = validateBookingId(bookingId);
         this.guestName = validateGuestName(guestName);
-        this.room = Objects.requireNonNull(room, "Room cannot be null");
-        this.checkInDate = Objects.requireNonNull(checkInDate, "Check-in date cannot be null");
-        this.checkOutDate = Objects.requireNonNull(checkOutDate, "Check-out date cannot be null");
+        this.room = validateRoom(room);
+        this.checkInDate = validateCheckInDate(checkInDate);
+        this.checkOutDate = validateCheckOutDate(checkOutDate);
         this.totalPrice = validatePrice(totalPrice);
-        this.status = Objects.requireNonNull(status, "Booking status cannot be null");
+        this.status = validateStatus(status);
         
         validateDateRange();
     }
@@ -58,6 +58,37 @@ public final class Booking {
             throw new IllegalArgumentException("Guest name must be at least 2 characters");
         }
         return guestName.trim();
+    }
+    
+    private Room validateRoom(Room room) {
+        if (room == null) {
+            throw new IllegalArgumentException("Room cannot be null");
+        }
+        return room;
+    }
+    
+    private LocalDate validateCheckInDate(LocalDate checkInDate) {
+        if (checkInDate == null) {
+            throw new IllegalArgumentException("Check-in date cannot be null");
+        }
+        if (checkInDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Check-in date cannot be in the past");
+        }
+        return checkInDate;
+    }
+    
+    private LocalDate validateCheckOutDate(LocalDate checkOutDate) {
+        if (checkOutDate == null) {
+            throw new IllegalArgumentException("Check-out date cannot be null");
+        }
+        return checkOutDate;
+    }
+    
+    private BookingStatus validateStatus(BookingStatus status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Booking status cannot be null");
+        }
+        return status;
     }
     
     private double validatePrice(double totalPrice) {
