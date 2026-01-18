@@ -228,6 +228,8 @@ public class HotelManagementApp {
             System.out.println("✗ Should have failed!");
         } catch (InvalidBookingException e) {
             System.out.println("✓ Correctly caught exception: " + e.getMessage());
+        } catch (RoomNotAvailableException e) {
+            System.out.println("✓ Correctly caught exception: " + e.getMessage());
         }
         
        
@@ -238,6 +240,8 @@ public class HotelManagementApp {
                     date1, date1.minusDays(1));
             System.out.println("✗ Should have failed!");
         } catch (InvalidBookingException e) {
+            System.out.println("✓ Correctly caught exception: " + e.getMessage());
+        } catch (RoomNotAvailableException e) {
             System.out.println("✓ Correctly caught exception: " + e.getMessage());
         }
         
