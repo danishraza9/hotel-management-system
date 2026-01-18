@@ -1,0 +1,73 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# IDE - IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+*.iml
+out/
+
+# IDE - Visual Studio Code
+.vscode/
+*.code-workspace
+
+# IDE - Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# IDE - NetBeans
+nbproject/
+.nb-gradle/
+build/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Build
+build/
+dist/
+*.so
+*.dll
+*.dylib
+
+# JaCoCo Coverage
+.jacoco.exec
+.jacoco
+target/site/jacoco/
+
+# Maven Shade
+*.original
+
+# Local environment variables
+.env
+.env.local
+*.properties.local
+
+# IDE specific files
+.gradle/
+.idea_modules/
