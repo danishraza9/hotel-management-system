@@ -9,44 +9,41 @@ import com.hotel.service.HotelService;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Main application class demonstrating hotel management system functionality.
- * Shows all major use cases including hotel setup, room booking, availability checking.
- */
+
 public class HotelManagementApp {
     
     public static void main(String[] args) {
         System.out.println("========================================");
-        System.out.println("Hotel Management System Demo");
+        System.out.println("Hotel Management System");
         System.out.println("========================================\n");
         
         try {
-            // Initialize hotel with rooms
+          
             Hotel hotel = initializeHotel();
             
-            // Create services
+          
             HotelService hotelService = new HotelService(hotel);
             BookingService bookingService = new BookingService(hotel);
             
-            // Display hotel information
+         
             displayHotelInfo(hotel, hotelService);
             
-            // Demonstrate availability checking
+        
             demonstrateAvailabilityCheck(hotelService);
             
-            // Demonstrate room filtering
+          
             demonstrateRoomFiltering(hotelService);
             
-            // Demonstrate booking creation
+          
             demonstrateBookingCreation(bookingService);
             
-            // Demonstrate booking queries
+          
             demonstrateBookingQueries(bookingService);
             
-            // Demonstrate error handling
+         
             demonstrateErrorHandling(bookingService);
             
-            // Display final statistics
+        
             displayFinalStatistics(hotel, hotelService, bookingService);
             
         } catch (Exception e) {
@@ -55,16 +52,14 @@ public class HotelManagementApp {
         }
     }
     
-    /**
-     * Initializes a hotel with multiple rooms of different types.
-     */
+  
     private static Hotel initializeHotel() {
         System.out.println("1. INITIALIZING HOTEL");
         System.out.println("-".repeat(40));
         
         Hotel hotel = new Hotel("LUXURY-001", "Grand Luxury Hotel", "New York", 5);
         
-        // Add rooms
+     
         hotel.addRoom(new Room("101", RoomType.SINGLE, 79.99));
         hotel.addRoom(new Room("102", RoomType.SINGLE, 79.99));
         hotel.addRoom(new Room("201", RoomType.DOUBLE, 129.99));
@@ -81,9 +76,7 @@ public class HotelManagementApp {
         return hotel;
     }
     
-    /**
-     * Displays hotel information and statistics.
-     */
+    
     private static void displayHotelInfo(Hotel hotel, HotelService hotelService) {
         System.out.println("2. HOTEL INFORMATION");
         System.out.println("-".repeat(40));
@@ -94,10 +87,7 @@ public class HotelManagementApp {
         System.out.println("Average Price: $" + String.format("%.2f", hotelService.getAveragePriceOfAvailableRooms()));
         System.out.println();
     }
-    
-    /**
-     * Demonstrates room availability checking.
-     */
+   
     private static void demonstrateAvailabilityCheck(HotelService hotelService) {
         System.out.println("3. CHECKING ROOM AVAILABILITY");
         System.out.println("-".repeat(40));
@@ -123,14 +113,12 @@ public class HotelManagementApp {
         System.out.println();
     }
     
-    /**
-     * Demonstrates filtering rooms by type and status.
-     */
+    
     private static void demonstrateRoomFiltering(HotelService hotelService) {
         System.out.println("4. ROOM FILTERING");
         System.out.println("-".repeat(40));
         
-        // Filter by type
+     
         System.out.println("Double Rooms:");
         List<Room> doubleRooms = hotelService.getAvailableRoomsByType(RoomType.DOUBLE);
         for (Room room : doubleRooms) {
@@ -138,7 +126,7 @@ public class HotelManagementApp {
                     String.format("%.2f", room.getPricePerNight()));
         }
         
-        // Show price range
+   
         Room cheapest = hotelService.findCheapestAvailableRoom();
         Room expensive = hotelService.findMostExpensiveAvailableRoom();
         System.out.println("Price range: $" + String.format("%.2f", cheapest.getPricePerNight()) +
@@ -146,9 +134,7 @@ public class HotelManagementApp {
         System.out.println();
     }
     
-    /**
-     * Demonstrates booking creation with multiple scenarios.
-     */
+ 
     private static void demonstrateBookingCreation(BookingService bookingService) {
         System.out.println("5. CREATING BOOKINGS");
         System.out.println("-".repeat(40));
@@ -160,7 +146,7 @@ public class HotelManagementApp {
         LocalDate checkOut2 = checkIn2.plusDays(1);
         
         try {
-            // Booking 1
+          
             Booking booking1 = bookingService.createBooking("BK001", "John Anderson", "201",
                     checkIn1, checkOut1);
             System.out.println("✓ Booking 1 created:");
@@ -171,7 +157,7 @@ public class HotelManagementApp {
             System.out.println("  Total Price: $" + String.format("%.2f", booking1.getTotalPrice()));
             System.out.println();
             
-            // Booking 2
+         
             Booking booking2 = bookingService.createBooking("BK002", "Emma Wilson", "301",
                     checkIn2, checkOut2);
             System.out.println("✓ Booking 2 created:");
@@ -180,7 +166,7 @@ public class HotelManagementApp {
             System.out.println("  Total Price: $" + String.format("%.2f", booking2.getTotalPrice()));
             System.out.println();
             
-            // Booking 3 - Different dates, same room as booking 1
+         
             LocalDate checkIn3 = checkOut1.plusDays(1);
             LocalDate checkOut3 = checkIn3.plusDays(3);
             
@@ -197,29 +183,24 @@ public class HotelManagementApp {
         }
     }
     
-    /**
-     * Demonstrates various booking queries.
-     */
+    
     private static void demonstrateBookingQueries(BookingService bookingService) {
         System.out.println("6. BOOKING QUERIES");
         System.out.println("-".repeat(40));
         
-        // Get all bookings
+       
         System.out.println("Total bookings: " + bookingService.getTotalBookings());
         
-        // Get bookings by guest
+        
         System.out.println("\nBookings by guest:");
         List<Booking> johnBookings = bookingService.getBookingsByGuest("John Anderson");
         System.out.println("  John Anderson: " + johnBookings.size() + " booking(s)");
         
-        // Get active bookings
+        
         System.out.println("\nActive bookings: " + bookingService.getActiveBookings().size());
         System.out.println();
     }
-    
-    /**
-     * Demonstrates error handling for various invalid scenarios.
-     */
+ 
     private static void demonstrateErrorHandling(BookingService bookingService) {
         System.out.println("7. ERROR HANDLING & VALIDATION");
         System.out.println("-".repeat(40));
@@ -227,7 +208,7 @@ public class HotelManagementApp {
         LocalDate checkIn = LocalDate.now().plusDays(15);
         LocalDate checkOut = checkIn.plusDays(2);
         
-        // Try to book already booked room
+      
         try {
             System.out.println("Attempting to book already reserved room...");
             bookingService.createBooking("BK999", "Test Guest", "201", checkIn, checkOut);
@@ -238,7 +219,7 @@ public class HotelManagementApp {
             System.out.println("✓ Error: " + e.getMessage());
         }
         
-        // Try to book with past date
+     
         try {
             System.out.println("\nAttempting to book with past check-in date...");
             LocalDate pastDate = LocalDate.now().minusDays(1);
@@ -249,7 +230,7 @@ public class HotelManagementApp {
             System.out.println("✓ Correctly caught exception: " + e.getMessage());
         }
         
-        // Try invalid date range
+       
         try {
             System.out.println("\nAttempting booking with invalid date range...");
             LocalDate date1 = LocalDate.now().plusDays(20);
@@ -263,9 +244,7 @@ public class HotelManagementApp {
         System.out.println();
     }
     
-    /**
-     * Displays final statistics and summary.
-     */
+   
     private static void displayFinalStatistics(Hotel hotel, HotelService hotelService, 
                                                BookingService bookingService) {
         System.out.println("8. FINAL STATISTICS");
@@ -291,7 +270,7 @@ public class HotelManagementApp {
         }
         
         System.out.println("\n========================================");
-        System.out.println("Demo completed successfully!");
+        System.out.println("completed successfully!");
         System.out.println("========================================");
     }
 }
